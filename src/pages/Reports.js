@@ -18,6 +18,7 @@ import {
   Calendar, 
   TrendingUp, 
   TrendingDown,
+
   DollarSign
 } from 'lucide-react';
 import { transactionsAPI, reportsAPI } from '../services/api';
@@ -186,7 +187,7 @@ const Reports = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="md:flex md:items-center md:justify-between">
+      <div className="md:flex  md:justify-between md:items-center">
         <div className="flex-1 min-w-0">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
             Reports & Analytics
