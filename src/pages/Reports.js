@@ -157,15 +157,15 @@ const Reports = () => {
         month: parseInt(month)
       });
       
-      const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8;' });
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `expense-report-${selectedMonth}.xlsx`;
+      link.download = `expense-report-${selectedMonth}.csv`;
       link.click();
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error exporting Excel:', error);
+      console.error('Error exporting Excel/CSV:', error);
     }
   };
 
