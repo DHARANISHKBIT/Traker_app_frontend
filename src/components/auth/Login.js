@@ -27,7 +27,11 @@ const Login = () => {
     setLoading(true);
     setError('');
 
-    const result = await login(formData);
+    // Normalize inputs to avoid login failures due to spaces/case.
+    const result = await login({
+      email: formData.email.trim().toLowerCase(),
+      password: formData.password.trim(),
+    });
     
     if (result.success) {
       navigate('/dashboard');

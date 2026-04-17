@@ -37,9 +37,15 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
+      const backendMessage =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        (typeof error?.response?.data === 'string'
+          ? error.response.data
+          : undefined);
       return { 
         success: false, 
-        error: error.response?.data?.message || 'Login failed' 
+        error: backendMessage || error.message || 'Login failed'
       };
     }
   };
@@ -56,9 +62,15 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
+      const backendMessage =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        (typeof error?.response?.data === 'string'
+          ? error.response.data
+          : undefined);
       return { 
         success: false, 
-        error: error.response?.data?.message || 'Registration failed' 
+        error: backendMessage || error.message || 'Registration failed'
       };
     }
   };
