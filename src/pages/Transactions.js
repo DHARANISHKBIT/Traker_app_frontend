@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Plus, 
   Search, 
-  Filter, 
   Edit, 
   Trash2, 
   ArrowUpRight, 
-  ArrowDownRight,
-  Calendar
+  ArrowDownRight
 } from 'lucide-react';
 import { transactionsAPI } from '../services/api';
 
@@ -36,11 +34,7 @@ const Transactions = () => {
     description: ''
   });
 
-  useEffect(() => {
-    fetchTransactions();
-  }, [filters]);
-
-  const fetchTransactions = async () => {
+  const fetchTransactions = useCallback(async () => {
     try {
       setLoading(true);
       const response = await transactionsAPI.getAll(filters);
@@ -50,7 +44,11 @@ const Transactions = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    fetchTransactions();
+  }, [fetchTransactions]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
